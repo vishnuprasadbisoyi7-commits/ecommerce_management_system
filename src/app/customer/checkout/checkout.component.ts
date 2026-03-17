@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Cart, Order } from '../../models/dataTypes';
-import { FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ShopService } from '../../services/shop.service';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-checkout',
+  standalone: false,
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
 })
@@ -15,12 +16,12 @@ export class CheckoutComponent implements OnInit{
   public totalPrice: number | undefined
   public orderMsg: string | undefined
 
-  constructor(private fb: FormBuilder, private shopService: ShopService, private router: Router){}
+  constructor(private shopService: ShopService, private router: Router){}
 
-  addressForm = this.fb.group({
-    address: [''],
-    email: [''],
-    contact: ['']
+  addressForm = new FormGroup({
+    address: new FormControl(''),
+    email: new FormControl(''),
+    contact: new FormControl('')
   })
 
   ngOnInit(): void {

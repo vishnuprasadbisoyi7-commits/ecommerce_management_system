@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SellerSignupService } from '../../services/seller-signup.service';
 import { Router } from '@angular/router';
 import { Signup } from '../../models/dataTypes';
 
 @Component({
   selector: 'app-seller-signup',
+  standalone: false,
   templateUrl: './seller-signup.component.html',
   styleUrl: './seller-signup.component.css'
 })
@@ -13,17 +14,17 @@ export class SellerSignupComponent implements OnInit{
 
   public signupMsg: string = ''
 
-  constructor(private fb: FormBuilder, private signupService: SellerSignupService, private router: Router){}
+  constructor(private signupService: SellerSignupService, private router: Router){}
 
-  signupForm = this.fb.group({
-    username: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required]]
+  signupForm = new FormGroup({
+    username: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required])
   })
 
-  loginForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required]]
+  loginForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required])
   })
 
   ngOnInit(): void {

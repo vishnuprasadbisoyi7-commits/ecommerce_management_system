@@ -4,6 +4,7 @@ import { ShopService } from '../../services/shop.service';
 
 @Component({
   selector: 'app-order',
+  standalone: false,
   templateUrl: './order.component.html',
   styleUrl: './order.component.css'
 })

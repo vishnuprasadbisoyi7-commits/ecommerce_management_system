@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Cart, Product, Signup } from '../../models/dataTypes';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomerSignupService } from '../../services/customer-signup.service';
 import { ShopService } from '../../services/shop.service';
 
 @Component({
   selector: 'app-customer-signup',
+  standalone: false,
   templateUrl: './customer-signup.component.html',
   styleUrl: './customer-signup.component.css'
 })
@@ -14,18 +15,18 @@ export class CustomerSignupComponent implements OnInit{
 
   public signupMsg: string = ''
 
-  constructor(private fb: FormBuilder, private router: Router, private signupService: CustomerSignupService,
+  constructor(private router: Router, private signupService: CustomerSignupService,
     private shopService: ShopService){}
 
-  customerSignupForm = this.fb.group({
-    username: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required]]
+  customerSignupForm = new FormGroup({
+    username: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required])
   })
 
-  customerLoginForm = this.fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required]]
+  customerLoginForm = new FormGroup({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required])
   })
 
   ngOnInit(): void {

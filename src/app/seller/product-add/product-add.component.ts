@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { ProductsService } from '../../services/products.service';
 import { Router } from '@angular/router';
 import { Product } from '../../models/dataTypes';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-product-add',
+  standalone: false,
   templateUrl: './product-add.component.html',
   styleUrl: './product-add.component.css'
 })
@@ -13,16 +14,16 @@ export class ProductAddComponent {
 
   public productMsg: string | undefined
 
-  constructor(private fb: FormBuilder, private productService: ProductsService, private router: Router){}
+  constructor(private productService: ProductsService, private router: Router){}
 
-  productForm = this.fb.group({
-    title: [''],
-    price: [0],
-    color: [''],
-    categories: [''],
-    desc: [''],
-    image: [''],
-    size: ['']
+  productForm = new FormGroup({
+    title: new FormControl(''),
+    price: new FormControl(0),
+    color: new FormControl(''),
+    categories: new FormControl(''),
+    desc: new FormControl(''),
+    image: new FormControl(''),
+    size: new FormControl('')
   })
 
   onSubmit(){

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../models/dataTypes';
-import { FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-product-update',
+  standalone: false,
   templateUrl: './product-update.component.html',
   styleUrl: './product-update.component.css'
 })
@@ -15,17 +16,17 @@ export class ProductUpdateComponent implements OnInit{
   public productId: string | undefined
   public product: Product | undefined
 
-  constructor(private fb: FormBuilder, private productService: ProductsService, private router: Router, 
+  constructor(private productService: ProductsService, private router: Router, 
     private activatedRoute: ActivatedRoute){}
 
-  productUpdateForm = this.fb.group({
-    title: [''],
-    price: [0],
-    color: [''],
-    categories: [''],
-    desc: [''],
-    image: [''],
-    size: ['']
+  productUpdateForm = new FormGroup({
+    title: new FormControl(''),
+    price: new FormControl(0),
+    color: new FormControl(''),
+    categories: new FormControl(''),
+    desc: new FormControl(''),
+    image: new FormControl(''),
+    size: new FormControl('')
   })
 
   ngOnInit(): void {
@@ -34,14 +35,14 @@ export class ProductUpdateComponent implements OnInit{
       this.productId && this.productService.getProduct(this.productId).subscribe((res)=>{
         
         if(res){
-          this.productUpdateForm = this.fb.group({
-            title: [res.title],
-            price: [res.price],
-            color: [res.color],
-            categories: [res.categories],
-            desc: [res.desc],
-            image: [res.image],
-            size: [res.size]
+          this.productUpdateForm.setValue({
+            title: res.title ?? '',
+            price: res.price ?? 0,
+            color: res.color ?? '',
+            categories: res.categories ?? '',
+            desc: res.desc ?? '',
+            image: res.image ?? '',
+            size: res.size ?? ''
           })
         }
       })

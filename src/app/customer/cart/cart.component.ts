@@ -5,6 +5,7 @@ import { ShopService } from '../../services/shop.service';
 
 @Component({
   selector: 'app-cart',
+  standalone: false,
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })
