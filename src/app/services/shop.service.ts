@@ -8,8 +8,8 @@ import { catchError, throwError } from 'rxjs';
 })
 export class ShopService {
 
-  public replaceUrl = 'http://localhost:5000/'
-  public url = 'https://e-commerce-backend-f8v8.onrender.com/'
+  public replaceUrl =  'https://e-commerce-backend-f8v8.onrender.com/'
+  public url = 'http://localhost:5000/'
 
   public cartDataLength = new EventEmitter<Product[] | []>()
 

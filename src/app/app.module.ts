@@ -10,6 +10,8 @@ import { CustomerModule } from './customer/customer.module';
 import { SellerModule } from './seller/seller.module';
 import { SignupModule } from './signup/signup.module';
 import { HttpClientModule } from '@angular/common/http';
+import { Sidebar } from './misc/sidebar/sidebar';
+import { Views } from './misc/views/views';
 
 // import { AppRoutingModule } from './app-routing.module';
 // import { AppComponent } from './app.component';
@@ -24,7 +26,9 @@ import { HttpClientModule } from '@angular/common/http';
   declarations: [
     AppComponent,
     HeadersComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    Sidebar,
+    Views
   ],
   imports: [
     BrowserModule,

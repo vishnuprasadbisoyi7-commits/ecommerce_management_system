@@ -1,7 +1,8 @@
-h1{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #573b8a;
-    margin-top: 10%;
+:host {
+  display: grid;
+  place-items: center;
+  min-height: 50vh;
+  color: var(--app-accent-2);
+  font-size: 1.4rem;
+  font-weight: 700;
 }

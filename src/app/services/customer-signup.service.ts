@@ -10,8 +10,8 @@ import { ShopService } from './shop.service';
 })
 export class CustomerSignupService {
 
-  public replaceUrl = 'http://localhost:5000/'
-  public url = 'https://e-commerce-backend-f8v8.onrender.com/'
+  public replaceUrl =  'https://e-commerce-backend-f8v8.onrender.com/'
+  public url = 'http://localhost:8089/api/'
   public signupMsg = new EventEmitter<boolean>(false)
   public isCustomerLoggedIn = new BehaviorSubject<boolean>(false)
 
