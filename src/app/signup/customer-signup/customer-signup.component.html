@@ -25,7 +25,7 @@
 			<div class="login">
 				<form [formGroup]="customerLoginForm" (ngSubmit)="onLogin()">
 					<label for="chk" aria-hidden="true">User Login</label>
-					<input type="email" name="email" placeholder="Email" formControlName="email">
+					<input type="text" formControlName="username" placeholder="User ID">
 					<input type="password" name="password" placeholder="Password" formControlName="password">
 					<button>Login</button>
 					<small class="login-msg">{{signupMsg}}</small>

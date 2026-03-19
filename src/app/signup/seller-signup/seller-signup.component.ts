@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SellerSignupService } from '../../services/seller-signup.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Signup } from '../../models/dataTypes';
 
 @Component({
@@ -13,8 +13,9 @@ import { Signup } from '../../models/dataTypes';
 export class SellerSignupComponent implements OnInit{
 
   public signupMsg: string = ''
+  private redirectUrl: string | null = null
 
-  constructor(private signupService: SellerSignupService, private router: Router){}
+  constructor(private signupService: SellerSignupService, private router: Router, private route: ActivatedRoute){}
 
   signupForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
@@ -23,12 +24,13 @@ export class SellerSignupComponent implements OnInit{
   })
 
   loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
+    username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required])
   })
 
   ngOnInit(): void {
     this.signupService.reloadSeller()
+    this.redirectUrl = this.route.snapshot.queryParamMap.get('redirectUrl')
   }
   
   onSignup(){
@@ -49,7 +51,8 @@ export class SellerSignupComponent implements OnInit{
 
   onLogin(){
     let userData = this.loginForm.value as Signup
-    this.signupService.loginUser(userData)
+    const redirect = this.redirectUrl && this.redirectUrl.startsWith('/seller') ? this.redirectUrl : undefined
+    this.signupService.loginUser(userData, redirect)
     this.signupService.signupMsg.subscribe((res)=>{
       if(res){
         // console.log(res);

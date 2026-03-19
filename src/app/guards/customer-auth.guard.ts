@@ -1,4 +1,4 @@
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from "@angular/router";
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from "@angular/router";
 import { Observable } from "rxjs";
 import { Injectable } from "@angular/core";
 import { CustomerSignupService } from "../services/customer-signup.service";
@@ -8,12 +8,17 @@ import { CustomerSignupService } from "../services/customer-signup.service";
   providedIn: 'root'
 })
 export class customerAuthGuard implements CanActivate{
-  constructor(private customerSignupService: CustomerSignupService){}
+  constructor(private customerSignupService: CustomerSignupService, private router: Router){}
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    if(localStorage.getItem('customer')){
+    const hasCustomer = !!localStorage.getItem('customer') || this.customerSignupService.isCustomerLoggedIn.value
+    if(hasCustomer){
       return true;
-     }
+    }
 
-    return this.customerSignupService.isCustomerLoggedIn
+    if(localStorage.getItem('admin')){
+      return this.router.createUrlTree(['/seller', 'products'])
+    }
+
+    return this.router.createUrlTree(['/'], { queryParams: { redirectUrl: state.url } })
   }
 }

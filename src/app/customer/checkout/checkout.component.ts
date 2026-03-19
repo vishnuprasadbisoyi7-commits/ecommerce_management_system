@@ -65,7 +65,7 @@ export class CheckoutComponent implements OnInit{
               this.shopService.getCartCount()
             }
           })
-          this.router.navigate(['/orders'])
+          this.router.navigate(['/customer', 'orders'])
         }, 4000);
       })
     }

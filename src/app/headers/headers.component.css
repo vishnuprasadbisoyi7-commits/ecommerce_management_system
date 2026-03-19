@@ -3,7 +3,7 @@
 }
 
 .container {
-  background: linear-gradient(135deg, #3d405b 0%, #2f3146 100%);
+  background: linear-gradient(135deg, #5968f0 0%, #2fd368 100%);
   color: #fff;
   padding: 16px 24px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -73,10 +73,28 @@
   padding: 0;
 }
 
+.list {
+  margin-left: auto;
+}
+
 .list ul li {
   cursor: pointer;
   font-weight: 600;
   font-size: 0.95rem;
+}
+
+.btn-danger {
+  background: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-danger:hover {
+  filter: brightness(0.95);
 }
 
 .dropdown {

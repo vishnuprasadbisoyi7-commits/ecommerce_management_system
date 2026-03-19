@@ -134,12 +134,6 @@ loginUser(userData: Signup, redirectUrl?: string){
     }
   }
 
-  logout(){
-    localStorage.removeItem('admin')
-    this.isSellerLoggedIn.next(false)
-    this.router.navigate(['/customer', 'shop'])
-  }
-
   getUser(userData: Signup){
     let Headers = this.getHeaders()
     return this.http.get<Signup>(`${this.url}users/${userData._id}`, { headers: Headers })

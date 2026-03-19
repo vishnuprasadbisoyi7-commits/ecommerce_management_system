@@ -1,1 +1,37 @@
-<p>sidebar works!</p>
+<aside *ngIf="isVisible" class="sidebar" [class.hidden]="isHidden" aria-label="Sidebar">
+  <div class="sidebar-header">
+    <div class="brand">
+      <div class="brand-badge">EC</div>
+      <div class="brand-text">
+        <div class="brand-title">E-Commerce</div>
+        <div class="brand-subtitle">Quick Links</div>
+      </div>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <ng-container *ngFor="let item of menuStructure">
+      <a
+        *ngIf="item.type === 'link'"
+        [routerLink]="item.route"
+        class="sidebar-link"
+        [class.active]="isActive(item)">
+        <span>{{ item.title }}</span>
+      </a>
+      <div *ngIf="item.type === 'section'" class="sidebar-section">
+        <div class="sidebar-section-header" (click)="toggleSection(item.id)">
+          <span class="sidebar-section-title">{{ item.title }}</span>
+          <span class="sidebar-chevron">{{ isExpanded(item.id) ? '▲' : '▼' }}</span>
+        </div>
+        <div class="sidebar-section-content" [class.expanded]="isExpanded(item.id)">
+          <a
+            *ngFor="let child of item.children"
+            [routerLink]="child.route"
+            class="sidebar-link sidebar-sublink"
+            [class.active]="isActive(child)">
+            <span>{{ child.title }}</span>
+          </a>
+        </div>
+      </div>
+    </ng-container>
+  </nav>
+</aside>

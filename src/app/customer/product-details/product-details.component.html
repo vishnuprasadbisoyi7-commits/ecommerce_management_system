@@ -16,7 +16,7 @@
                 <a (click)="addToCart()" *ngIf="!removeCartLink" class="btn" style="background: #de7906;">Add To Cart</a>&nbsp;
                 <a (click)="removeFromCart()" *ngIf="removeCartLink" class="btn" style="background: #de7906;">Remove From Cart</a>&nbsp;
                 <a (click)="buyNow()" *ngIf="!removeCartLink" class="btn">Buy Now</a>
-                <a routerLink="/cart" *ngIf="removeCartLink" class="btn">Go To Cart</a>
+                <a routerLink="/customer/cart" *ngIf="removeCartLink" class="btn">Go To Cart</a>
             </div>
             <div class="quantity-group" *ngIf="!removeCartLink">
                 <button (click)="handleQuantity('min')">-</button>

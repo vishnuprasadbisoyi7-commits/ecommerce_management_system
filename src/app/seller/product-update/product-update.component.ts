@@ -71,7 +71,7 @@ export class ProductUpdateComponent implements OnInit{
     if(val==='suc'){
       setTimeout(() => {
         this.productMsg = undefined
-        this.router.navigate(['/products'])
+        this.router.navigate(['/seller', 'products'])
       }, 2500);
     }else{
       setTimeout(() => {

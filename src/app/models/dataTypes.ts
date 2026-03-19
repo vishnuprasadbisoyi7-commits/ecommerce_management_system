@@ -7,6 +7,14 @@ export interface Signup{
     isAdmin: boolean | undefined
 }
 
+export interface LoginResponse {
+  USER_ID: string;
+  USER_ROLE: string;
+  token: string;
+  STATUS: string;
+  status: string;
+}
+
 export interface Product{
     _id: string,
     title: string,

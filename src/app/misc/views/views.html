@@ -1,1 +1,21 @@
-<p>views works!</p>
+<section class="landing">
+  <div class="landing-card">
+    <p class="eyebrow">Welcome to</p>
+    <h1 class="title">E-Commerce Application</h1>
+    <p class="subtitle">Choose how you want to sign in.</p>
+    <div class="cta-row">
+      <a
+        class="cta-button seller"
+        routerLink="/seller-signup"
+        [queryParams]="redirectUrl ? { redirectUrl: redirectUrl } : null">
+        Seller Login
+      </a>
+      <a
+        class="cta-button customer"
+        routerLink="/customer-signup"
+        [queryParams]="redirectUrl ? { redirectUrl: redirectUrl } : null">
+        Customer Login
+      </a>
+    </div>
+  </div>
+</section>

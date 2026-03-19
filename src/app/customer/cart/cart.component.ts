@@ -43,7 +43,7 @@ export class CartComponent implements OnInit{
       this.priceSummary.total = price + price/10 + 100
       // console.log(this.priceSummary.total);
       if(!this.cart?.length){
-        this.router.navigate(['/'])
+        this.router.navigate(['/customer', 'shop'])
       }else{
         this.shopService.getCartCount()
       }
@@ -58,7 +58,7 @@ export class CartComponent implements OnInit{
   }
 
   checkoutOrder(){
-    this.router.navigate(['/checkout'])
+    this.router.navigate(['/customer', 'checkout'])
   }
 
 }

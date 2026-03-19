@@ -119,7 +119,7 @@ export class ProductDetailsComponent implements OnInit{
       if(res){
         this.shopService.getCartCount()
         this.removeCartLink = true 
-        this.router.navigate(['/cart'])
+        this.router.navigate(['/customer', 'cart'])
       }
     })
     }

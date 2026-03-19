@@ -15,7 +15,6 @@ export class HeadersComponent implements OnInit{
 
   public menuType: string = 'default';
   public userName: string = ''
-  public isHidden: boolean = false
   public searchResults: undefined | Product[] 
   public cartCount: number = 0
 
@@ -31,18 +30,23 @@ export class HeadersComponent implements OnInit{
         let customerStore = localStorage.getItem('customer')
         let customerData = customerStore && JSON.parse(customerStore)
 
-    if(sellerData && res.url.includes('products')){
+    if(sellerData){
+      this.menuType = 'seller'
       this.sellerSignupService.getUser(sellerData).subscribe((res)=>{
         this.userName = res.username
-        this.menuType = 'seller'
+      }, () => {
+        this.userName = ''
       })
     }else if(customerData){
+      this.menuType = 'customer'
       this.customerSignupService.getUser(customerData).subscribe((res)=>{
         this.userName = res.username
-        this.menuType = 'customer'
+      }, () => {
+        this.userName = ''
       })
     }else{
       this.menuType = 'default'
+      this.userName = ''
     }
     }
     })
@@ -67,18 +71,25 @@ export class HeadersComponent implements OnInit{
   }
 
   onCustomerLogout(){
-    localStorage.removeItem('customer')
-    this.router.navigate(['/'])
-    this.shopService.cartDataLength.emit([])
+    this.customerSignupService.logout()
   }
 
   onSellerLogout(){
-    localStorage.removeItem('admin')
-    this.router.navigate(['/'])
+    this.sellerSignupService.logout()
+  }
+
+  onHeaderLogout(){
+    if(this.menuType === 'seller'){
+      this.onSellerLogout()
+      return
+    }
+    if(this.menuType === 'customer'){
+      this.onCustomerLogout()
+    }
   }
 
   onSearch(searchVal: string){
-    this.router.navigate([`/search/${searchVal}`])
+    this.router.navigate([`/customer/search/${searchVal}`])
   }
 
   searchProduct(queryEventData: KeyboardEvent){
@@ -99,7 +110,7 @@ export class HeadersComponent implements OnInit{
   }
 
   redirectToDetails(productId: string){
-    this.router.navigate([`/product-details/${productId}`])
+    this.router.navigate([`/customer/product-details/${productId}`])
   }
 
 

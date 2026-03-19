@@ -1,0 +1,144 @@
+.sidebar {
+  width: 260px;
+  background: linear-gradient(160deg, #2f3146 0%, #3d405b 100%);
+  padding: 18px;
+  border-radius: 14px;
+  color: #fff;
+  min-height: calc(100vh - 140px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 96px;
+}
+
+.sidebar.hidden {
+  display: none;
+}
+
+.sidebar-header {
+  margin-bottom: 18px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #e07a5f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+.brand-title {
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.brand-subtitle {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: 2px;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: calc(100vh - 240px);
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.sidebar-link.active {
+  border-left: 4px solid #e07a5f;
+  padding-left: 10px;
+  background: rgba(224, 122, 95, 0.18);
+}
+
+.sidebar-section {
+  margin-bottom: 4px;
+}
+
+.sidebar-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  font-weight: 600;
+  border: 1px solid transparent;
+}
+
+.sidebar-section-header:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.sidebar-section-title {
+  flex: 1;
+}
+
+.sidebar-chevron {
+  font-size: 12px;
+}
+
+.sidebar-section-content {
+  display: none;
+  margin-top: 4px;
+  padding-left: 8px;
+}
+
+.sidebar-section-content.expanded {
+  display: block;
+}
+
+.sidebar-sublink {
+  padding-left: 24px;
+  font-size: 13px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+@media (max-width: 900px) {
+  .sidebar {
+    position: static;
+    width: 100%;
+    min-height: auto;
+  }
+
+  .sidebar-nav {
+    max-height: none;
+  }
+}

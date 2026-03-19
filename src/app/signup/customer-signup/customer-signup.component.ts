@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Cart, Product, Signup } from '../../models/dataTypes';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerSignupService } from '../../services/customer-signup.service';
 import { ShopService } from '../../services/shop.service';
 
@@ -14,8 +14,10 @@ import { ShopService } from '../../services/shop.service';
 export class CustomerSignupComponent implements OnInit{
 
   public signupMsg: string = ''
+  private redirectUrl: string | null = null
 
   constructor(private router: Router, private signupService: CustomerSignupService,
+    private route: ActivatedRoute,
     private shopService: ShopService){}
 
   customerSignupForm = new FormGroup({
@@ -25,12 +27,13 @@ export class CustomerSignupComponent implements OnInit{
   })
 
   customerLoginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
+    username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required])
   })
 
   ngOnInit(): void {
     this.signupService.reloadSeller()
+    this.redirectUrl = this.route.snapshot.queryParamMap.get('redirectUrl')
   }
 
   onSignup(){
@@ -51,7 +54,8 @@ export class CustomerSignupComponent implements OnInit{
 
   onLogin(){
     let userData = this.customerLoginForm.value as Signup
-    this.signupService.loginUser(userData)
+    const redirect = this.redirectUrl && this.redirectUrl.startsWith('/customer') ? this.redirectUrl : undefined
+    this.signupService.loginUser(userData, redirect)
     
     this.signupService.signupMsg.subscribe((res)=>{
       if(res){
