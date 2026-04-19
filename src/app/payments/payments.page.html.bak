@@ -1,0 +1,14 @@
+<section class="payments" [class.embedded]="embedded">
+  <header class="payments-header" *ngIf="!embedded">
+    <h2>Card Details</h2>
+    <a class="home-link" routerLink="/customer/shop">Home</a>
+  </header>
+
+  <div class="payments-form">
+    <input [(ngModel)]="cardinfo.number" placeholder="Card number" />
+    <input [(ngModel)]="cardinfo.expMonth" placeholder="Expiry month" />
+    <input [(ngModel)]="cardinfo.expYear" placeholder="Expiry year" />
+    <input [(ngModel)]="cardinfo.cvc" placeholder="CVC" />
+    <button class="pay-btn" (click)="pay()">Pay Via Stripe</button>
+  </div>
+</section>

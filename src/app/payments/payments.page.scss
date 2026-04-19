@@ -1,0 +1,77 @@
+:host {
+  display: block;
+}
+
+.payments {
+  max-width: 520px;
+  margin: 40px auto;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 28px rgba(47, 49, 70, 0.12);
+  border: 1px solid #ece7df;
+}
+
+.payments.embedded {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
+
+.payments-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.payments-header h2 {
+  margin: 0;
+  color: #2f3146;
+  font-size: 1.1rem;
+}
+
+.home-link {
+  text-decoration: none;
+  font-weight: 600;
+  color: #3d405b;
+}
+
+.payments-form {
+  display: grid;
+  gap: 14px;
+}
+
+.payments-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.payments-form input {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid #d6d6d6;
+  box-sizing: border-box;
+  font: inherit;
+}
+
+.pay-btn {
+  padding: 12px;
+  border: none;
+  border-radius: 12px;
+  background: #2f3146;
+  color: #fff;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .payments-row {
+    grid-template-columns: 1fr;
+  }
+}

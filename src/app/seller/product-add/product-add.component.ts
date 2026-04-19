@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { ProductsService } from '../../services/products.service';
-import { Router } from '@angular/router';
 import { Product } from '../../models/dataTypes';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-product-add',
@@ -13,40 +12,59 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class ProductAddComponent {
 
   public productMsg: string | undefined
+  public isSubmitting = false;
 
-  constructor(private productService: ProductsService, private router: Router){}
+  constructor(private productService: ProductsService){}
 
-  productForm = new FormGroup({
-    title: new FormControl(''),
-    price: new FormControl(0),
-    color: new FormControl(''),
-    categories: new FormControl(''),
-    desc: new FormControl(''),
-    image: new FormControl(''),
-    size: new FormControl('')
+  readonly productForm = new FormGroup({
+    title: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    price: new FormControl(0, { nonNullable: true, validators: [Validators.required, Validators.min(1)] }),
+    color: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    categories: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    desc: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    image: new FormControl('', { nonNullable: true, validators: [Validators.required] }),
+    size: new FormControl('', { nonNullable: true, validators: [Validators.required] })
   })
 
   onSubmit(){
-    let productData = this.productForm!.value as Product
-    this.productService.createProduct(productData).subscribe((res)=>{
-      // console.log('rf', res);
-      if(res && res._id){
-        this.productMsg = 'Product is successfully added'
-      }     
-      this.getTimeout()
-    }, (err)=>{
-      if(err){
-        // console.log(err.message);
-        this.productMsg = 'Please Add Unique Name Or Add A Valid Price'
+    if (this.productForm.invalid) {
+      this.productForm.markAllAsTouched();
+      this.productMsg = 'Fill in all product fields before submitting.';
+      this.clearMessageAfterDelay();
+      return;
+    }
+
+    const productData = this.productForm.getRawValue() as Product;
+    this.isSubmitting = true;
+
+    this.productService.createProduct(productData).subscribe({
+      next: () => {
+        this.productMsg = 'Product saved successfully.';
+        this.productForm.reset({
+          title: '',
+          price: 0,
+          color: '',
+          categories: '',
+          desc: '',
+          image: '',
+          size: ''
+        });
+        this.clearMessageAfterDelay();
+      },
+      error: (err) => {
+        this.productMsg = err?.error?.msg || err?.error?.message || 'Unable to save the product.';
+        this.isSubmitting = false;
+        this.clearMessageAfterDelay();
+      },
+      complete: () => {
+        this.isSubmitting = false;
       }
-      this.getTimeout()
     })
   }
 
-  getTimeout(){
+  clearMessageAfterDelay(){
     setTimeout(() => {
       this.productMsg = undefined
-      this.productForm.reset()
     }, 4000);
   }
 

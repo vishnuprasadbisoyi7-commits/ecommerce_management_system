@@ -12,6 +12,7 @@ import { SignupModule } from './signup/signup.module';
 import { HttpClientModule } from '@angular/common/http';
 import { Sidebar } from './misc/sidebar/sidebar';
 import { Views } from './misc/views/views.component';
+import { PdfGenerator } from './pdf-generator/pdf-generator';
 
 // import { AppRoutingModule } from './app-routing.module';
 // import { AppComponent } from './app.component';
@@ -28,7 +29,8 @@ import { Views } from './misc/views/views.component';
     HeadersComponent,
     NotFoundComponent,
     Sidebar,
-    Views
+    Views,
+    PdfGenerator
   ],
   imports: [
     BrowserModule,

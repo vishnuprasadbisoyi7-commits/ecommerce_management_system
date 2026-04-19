@@ -1,186 +1,139 @@
-.login-box {
-  position: absolute;
-  top: 60%;
-  left: 25%;
-  width: 400px;
-  padding: 40px;
-  transform: translate(-50%, -50%);
-  background-color: #533b7f;
-  box-sizing: border-box;
-  box-shadow: 0 15px 25px rgba(179, 112, 201, 0.6);
-  border-radius: 10px;
+:host {
+  display: block;
+  padding: 32px 16px;
 }
 
-.header {
-  color: purple;
-  margin-left: 35%;
-  margin-top: 2%;
-  font-size: 3rem;
+.checkout-page {
+  max-width: 1120px;
+  margin: 0 auto;
 }
 
-.login-box h2 {
-  margin: 0 0 30px;
-  padding: 0;
-  color: #fff;
+.checkout-header {
+  margin-bottom: 24px;
   text-align: center;
 }
 
-.login-box .user-box {
-  position: relative;
+.checkout-header h1 {
+  margin: 0;
+  color: var(--app-accent-2);
 }
 
-.login-box .user-box input,
+.checkout-header p {
+  margin: 10px auto 0;
+  max-width: 640px;
+  color: var(--app-text-muted, #6b7280);
+}
+
+.checkout-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+
+.checkout-card {
+  min-height: 100%;
+  padding: 24px;
+  background: var(--app-surface);
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);
+  border: 1px solid var(--app-border);
+}
+
+.card-heading {
+  margin-bottom: 18px;
+}
+
+.card-heading h2 {
+  margin: 0;
+  color: var(--app-accent-2);
+}
+
+.checkout-form {
+  display: grid;
+  gap: 16px;
+}
+
+.user-box {
+  display: grid;
+  gap: 8px;
+}
+
+.user-box label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--app-accent-2);
+}
+
+input,
 textarea {
   width: 100%;
-  padding: 10px 0;
-  font-size: 16px;
-  color: #fff;
-  margin-bottom: 30px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--app-border);
+  box-sizing: border-box;
+  font: inherit;
+  background: #fff;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 110px;
+}
+
+.primary-btn {
+  width: 100%;
+  padding: 12px 14px;
   border: none;
-  border-bottom: 1px solid #fff;
-  outline: none;
-  background: transparent;
-}
-.login-box .user-box label {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 10px 0;
-  font-size: 16px;
+  border-radius: 12px;
+  background: var(--app-accent);
   color: #fff;
-  pointer-events: none;
-  transition: 0.5s;
+  font-weight: 700;
+  cursor: pointer;
 }
 
-.login-box .user-box input:focus ~ label,
-.login-box .user-box input:valid ~ label {
-  top: -20px;
-  left: 0;
-  color: plum;
-  font-size: 12px;
-}
-
-.login-box form a {
-  position: relative;
-  display: inline-block;
-  padding: 10px 20px;
-  color: plum;
-  font-size: 16px;
-  text-decoration: none;
-  text-transform: uppercase;
-  overflow: hidden;
-  transition: 0.5s;
-  margin-top: 40px;
-  letter-spacing: 4px;
-}
-
-.login-box a span {
-  position: absolute;
-  display: block;
-}
-
-.login-box a span:nth-child(1) {
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, plum);
-  animation: btn-anim1 1s linear infinite;
-}
-
-::placeholder {
-  color: white;
-  opacity: 1; /* Firefox */
-}
-
-@keyframes btn-anim1 {
-  0% {
-    left: -100%;
-  }
-  50%,
-  100% {
-    left: 100%;
-  }
-}
-
-.login-box a span:nth-child(2) {
-  top: -100%;
-  right: 0;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(180deg, transparent, plum);
-  animation: btn-anim2 1s linear infinite;
-  animation-delay: 0.25s;
-}
-
-@keyframes btn-anim2 {
-  0% {
-    top: -100%;
-  }
-  50%,
-  100% {
-    top: 100%;
-  }
-}
-
-.login-box a span:nth-child(3) {
-  bottom: 0;
-  right: -100%;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(270deg, transparent, plum);
-  animation: btn-anim3 1s linear infinite;
-  animation-delay: 0.5s;
-}
-
-@keyframes btn-anim3 {
-  0% {
-    right: -100%;
-  }
-  50%,
-  100% {
-    right: 100%;
-  }
-}
-
-.login-box a span:nth-child(4) {
-  bottom: -100%;
-  left: 0;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(360deg, transparent, plum);
-  animation: btn-anim4 1s linear infinite;
-  animation-delay: 0.75s;
-}
-
-@keyframes btn-anim4 {
-  0% {
-    bottom: -100%;
-  }
-  50%,
-  100% {
-    bottom: 100%;
-  }
+.checkout-summary {
+  display: grid;
+  gap: 18px;
 }
 
 .pay-method {
-  margin-left: 50%;
-  margin-top: 10%;
-  margin-right: 2%;
-  text-align: center;
-  background-color: #533b7f;
-  border-radius: 2rem;
+  padding: 18px 20px;
+  background: rgba(224, 122, 95, 0.08);
+  border: 1px solid rgba(224, 122, 95, 0.2);
+  border-radius: 16px;
 }
 
-.pay-method h2 {
-  padding: 10px 0;
-  color: white;
+.pay-method h3 {
+  margin: 0 0 8px;
+  color: var(--app-accent-2);
+}
+
+.total-price {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 800;
+  color: #b86822;
 }
 
 .order-msg {
-  margin-left: 50%;
-  margin-top: 40px;
-  margin-right: 2%;
+  max-width: 720px;
+  margin: 24px auto 0;
+  background: var(--app-surface);
+  padding: 16px 20px;
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);
+  border: 1px solid var(--app-border);
   text-align: center;
-  color: #533b7f;
+}
+
+.order-msg h2 {
+  margin: 0;
+  color: var(--app-accent-2);
+}
+
+@media (max-width: 900px) {
+  .checkout-grid {
+    grid-template-columns: 1fr;
+  }
 }

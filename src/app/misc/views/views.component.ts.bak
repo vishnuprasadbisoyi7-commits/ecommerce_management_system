@@ -18,7 +18,7 @@ export class Views implements OnInit {
     const isCustomer = !!localStorage.getItem('customer');
 
     if (isSeller) {
-      this.router.navigate(['/seller', 'upload']);
+      this.router.navigate(['/seller', 'products']);
       return;
     }
 

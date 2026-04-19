@@ -17,13 +17,12 @@ interface MenuItem {
   styleUrl: './sidebar.css',
 })
 export class Sidebar implements OnInit, OnDestroy {
-  @HostBinding('class.collapsed') isCollapsed = false;
+  isHidden = false;
   isVisible = false;
   @HostBinding('style.display') hostDisplay = 'none';
   expandedSections: Set<string> = new Set();
   private routerSubscription?: Subscription;
   private toggleSubscription?: Subscription;
-  private readonly sidebarStateKey = 'sidebar-collapsed';
 
   menuStructure: MenuItem[] = [];
 
@@ -31,10 +30,9 @@ export class Sidebar implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadMenuForRole();
-    this.isCollapsed = localStorage.getItem(this.sidebarStateKey) === 'true';
 
     const toggleHandler = () => {
-      this.toggleSidebar();
+      this.isHidden = !this.isHidden;
     };
     this.toggleSubscription = new Subscription();
     window.addEventListener('toggleSidebar', toggleHandler);
@@ -128,11 +126,6 @@ export class Sidebar implements OnInit, OnDestroy {
 
   isExpanded(sectionId: string): boolean {
     return this.expandedSections.has(sectionId);
-  }
-
-  toggleSidebar(): void {
-    this.isCollapsed = !this.isCollapsed;
-    localStorage.setItem(this.sidebarStateKey, String(this.isCollapsed));
   }
 
   toggleSection(sectionId: string): void {

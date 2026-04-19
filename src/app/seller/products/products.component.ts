@@ -10,9 +10,9 @@ import { ProductsService } from '../../services/products.service';
 })
 export class ProductsComponent implements OnInit{
 
-  public deleteMsg: string | undefined
-
-  public allProducts: Product[] | undefined
+  public pageMsg: string | undefined
+  public isLoading = false;
+  public allProducts: Product[] = [];
 
   constructor(private productService: ProductsService){}
 
@@ -21,32 +21,19 @@ export class ProductsComponent implements OnInit{
   }
 
   getAllProducts(){
-    this.productService.getProducts().subscribe((res)=>{
-      if(res){
-        this.allProducts = res
+    this.isLoading = true;
+    this.pageMsg = undefined;
+    this.productService.getProducts().subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        this.allProducts = res;
+        this.pageMsg = res.length ? undefined : 'No products found yet.';
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.allProducts = [];
+        this.pageMsg = err?.error?.msg || err?.error?.message || err?.statusText || 'Unable to load seller products.';
       }
     })
   }
-
-  onDelete(productId: string | undefined){
-    productId && this.productService.deleteProduct(productId).subscribe((res)=>{
-      if(res){
-        this.getAllProducts()
-        this.deleteMsg = 'Products Has Been Deleted'
-      }
-      this.getTimeout()
-    }, (err)=>{
-      if(err){
-        this.deleteMsg = err.statusText
-      }
-      this.getTimeout()
-    })
-  }
-
-  getTimeout(){
-    setTimeout(() => {
-      this.deleteMsg = undefined
-    }, 4000);
-  }
-
 }

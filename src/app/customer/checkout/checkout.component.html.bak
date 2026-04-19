@@ -46,22 +46,7 @@
         <p class="total-price">₹ {{ totalPrice }}</p>
       </div>
 
-      <div class="summary-actions">
-        <button type="button" class="secondary-btn" (click)="generateOrderSummaryPdf()">
-          {{ summaryGenerated ? 'Regenerate PDF Summary' : 'Generate PDF Summary' }}
-        </button>
-        <p class="summary-hint">Download a copy of this order summary before moving to payment.</p>
-      </div>
-
-      <div class="payment-panel" *ngIf="summaryGenerated; else paymentLocked">
-        <app-payments [embedded]="true"></app-payments>
-      </div>
-
-      <ng-template #paymentLocked>
-        <div class="payment-locked">
-          Generate the PDF summary to continue to the payment section.
-        </div>
-      </ng-template>
+      <app-payments [embedded]="true"></app-payments>
     </section>
   </div>
 

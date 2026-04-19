@@ -16,7 +16,7 @@ export class customerAuthGuard implements CanActivate{
     }
 
     if(localStorage.getItem('admin')){
-      return this.router.createUrlTree(['/seller', 'products'])
+      return this.router.createUrlTree(['/seller', 'upload'])
     }
 
     return this.router.createUrlTree(['/'], { queryParams: { redirectUrl: state.url } })

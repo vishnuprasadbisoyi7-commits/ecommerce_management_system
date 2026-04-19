@@ -9,6 +9,7 @@ import { OrderComponent } from './order/order.component';
 import { CustomerRoutingModule } from './customer-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { PaymentsPageModule } from '../payments/payments.module';
 
 // import { CustomerRoutingModule } from './customer-routing.module';
 // import { ShopComponent } from './shop/shop.component';
@@ -33,7 +34,8 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     CustomerRoutingModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    PaymentsPageModule
   ]
 })
 export class CustomerModule { }

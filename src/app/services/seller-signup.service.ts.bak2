@@ -114,7 +114,7 @@ loginUser(userData: Signup, redirectUrl?: string){
         if(redirectUrl){
           this.router.navigateByUrl(redirectUrl)
         }else{
-          this.router.navigate(['/seller', 'upload'])
+          this.router.navigate(['/seller', 'products'])
         }
 
       } else {
@@ -130,7 +130,7 @@ loginUser(userData: Signup, redirectUrl?: string){
   reloadSeller(){
     if(localStorage.getItem('admin')){
       this.isSellerLoggedIn.next(true)
-      this.router.navigate(['/seller', 'upload'])
+      this.router.navigate(['/seller', 'products'])
     }
   }
 

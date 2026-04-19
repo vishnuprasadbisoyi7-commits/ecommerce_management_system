@@ -1,6 +1,8 @@
 <h1>Add New Product</h1>
 
+<!-- Create Form -->
 <form id="form" [formGroup]="productForm" (ngSubmit)="onSubmit()">
+  <!-- Details -->
   <div class="form-control">
     <label>Name</label>
     <input
@@ -25,7 +27,7 @@
     <label>Price</label>
     <input
       formControlName="price"
-      type="number"
+      type="text"
       name="price"
       placeholder="Enter Product Price"
     />
@@ -65,7 +67,8 @@
     <label for="comment">Description</label>
     <textarea
       formControlName="desc"
-      id="comment"
+      name="text"
+      id=""
       cols="30"
       rows="8"
       name="desc"
@@ -75,9 +78,7 @@
 
   <p class="err-msg">{{ productMsg }}</p>
 
-  <button class="form-button" type="submit" [disabled]="isSubmitting">
-    {{ isSubmitting ? 'Saving...' : 'Submit' }}
-  </button>
+  <button class="form-button">Submit</button>
 </form>
 
 
